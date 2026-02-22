@@ -43,7 +43,27 @@ const products = [
   { name: 'Detroit 4991459', category: 'Control Valve', price: '650 ₽' },
   { name: 'Detroit 4991464', category: 'Spring', price: '210 ₽' },
   { name: 'Detroit 4991466', category: 'Retainer', price: '250 ₽' },
-  { name: 'Detroit 4991465', category: 'Spacer', price: '1 100 ₽' }
+  { name: 'Detroit 4991465', category: 'Spacer', price: '1 100 ₽' },
+
+
+  { name: 'Caterpillar 10R0781/198-6605/222-5926/222-5966/197-7107/199-6065', category: 'распылитель 41036/32', price: '3 100 ₽' },
+  { name: 'Caterpillar 10R0782/177-4754/178-0198/178-0199/205-1285', category: 'распылитель 41046/32', price: '3 100 ₽' },
+  { name: 'Caterpillar Piston', category: 'Piston', price: '850 ₽' },
+  { name: 'Caterpillar Plunger', category: 'Plunger', price: '2 600 ₽' },
+  { name: 'Caterpillar 11956', category: 'Check Valve', price: '2 200 ₽' },
+  { name: 'Caterpillar 0530', category: 'Internal Seal Kit', price: '300 ₽' },
+  { name: 'Caterpillar 2421539', category: 'External Seal Kit', price: '1 150 ₽' },
+  { name: 'Caterpillar 183074C92', category: 'External Seal Kit', price: '650 ₽' },
+  { name: 'Caterpillar 10R2781/10R0957/0R9257/211-3023/191-3003/140-8993', category: 'распылитель C15/3406', price: 'от 4 400 ₽' },
+  { name: 'Caterpillar 10R2780/0R4668/0R9258/211-3024/10R0959/117-1146', category: 'распылитель C15/3406', price: 'от 4 400 ₽' },
+  { name: 'Caterpillar 10R2782/118-7929/117-0481/10R0956/211-3022/0R9256', category: 'распылитель C15/3406', price: 'от 4 400 ₽' },
+  { name: 'Caterpillar 10R1273/10R1000/249-0708/249-0709/239-4909/232-1199', category: 'распылитель C15/3406', price: 'от 4 400 ₽' },
+  { name: 'Caterpillar 10R0963/212-3463/194-5083/10R9235/0R8773/0R4897', category: 'распылитель C12/3196', price: 'от 4 400 ₽' },
+  { name: 'Caterpillar 249-0708/10R2977', category: 'распылитель C12/C13', price: 'от 4 400 ₽' },
+  { name: 'Caterpillar 2123467/10R1259', category: 'распылитель C10', price: 'от 4 400 ₽' },
+  { name: 'Caterpillar Solenoid Kit', category: 'Solenoid Kit', price: '220 ₽' },
+  { name: 'Caterpillar RTF26300', category: 'External Kit C15(3406)', price: '420 ₽' },
+  { name: 'Caterpillar RTF26301', category: 'External Kit C12(3196)', price: '620 ₽' },
 ];
 
 const catalogGrid = document.getElementById('catalog-grid');
