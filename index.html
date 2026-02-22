@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forsynka — услуги, каталог и доставка</title>
+    <meta
+      name="description"
+      content="Современный сайт Forsynka: услуги, товары, каталог, доставка, информация о компании, политика конфиденциальности и cookies."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-content">
+        <a href="#hero" class="brand">Forsynka</a>
+        <nav class="main-nav" aria-label="Основная навигация">
+          <a href="#services">Услуги</a>
+          <a href="catalog.html">Каталог</a>
+          <a href="#delivery">Доставка</a>
+          <a href="#about">О нас</a>
+        </nav>
+        <a class="btn btn-primary" href="catalog.html">В каталог</a>
+      </div>
+    </header>
+
+    <main>
+      <section id="hero" class="hero">
+        <div class="container hero-grid">
+          <div>
+            <p class="eyebrow">Платформа для быстрого роста</p>
+            <h1>Услуги и товары в одном современном сайте</h1>
+            <p class="hero-text">
+              Мы объединяем сервис, подбор продукции и удобную доставку, чтобы
+              вы получали результат без лишней рутины.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#services">Наши услуги</a>
+              <a class="btn btn-ghost" href="#delivery">Условия доставки</a>
+            </div>
+          </div>
+          <aside class="hero-card" aria-label="Преимущества">
+            <h2>Почему выбирают нас</h2>
+            <ul>
+              <li>Персональные решения для бизнеса и частных клиентов</li>
+              <li>Каталог с живыми остатками и фильтрацией</li>
+              <li>Быстрая доставка по городу и регионам</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section id="services" class="section">
+        <div class="container">
+          <h2>Услуги</h2>
+          <div class="cards-grid">
+            <article class="card">
+              <h3>Консультация и подбор</h3>
+              <p>
+                Анализируем задачу, помогаем подобрать товары и формируем план
+                внедрения.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Комплектация под проект</h3>
+              <p>
+                Составляем комплексные поставки под бюджет, сроки и требования.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Сервисное сопровождение</h3>
+              <p>
+                Поддерживаем после покупки: обучение, обслуживание и контроль
+                качества.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="catalog" class="section section-muted">
+        <div class="container">
+          <div class="section-head">
+            <h2>Каталог товаров</h2>
+            <label class="search">
+              <span class="visually-hidden">Поиск товара</span>
+              <input
+                id="catalog-search"
+                type="search"
+                placeholder="Найти товар..."
+                autocomplete="off"
+              />
+            </label>
+          </div>
+          <div id="catalog-grid" class="catalog-grid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section id="delivery" class="section">
+        <div class="container delivery-grid">
+          <div>
+            <h2>Доставка</h2>
+            <p>
+              Доставляем ежедневно с 09:00 до 22:00. Вы можете выбрать экспресс
+              в день заказа или плановую доставку на удобное время.
+            </p>
+            <ul class="check-list">
+              <li>По городу — от 2 часов</li>
+              <li>По области — на следующий день</li>
+              <li>По России — через партнёрские службы</li>
+            </ul>
+          </div>
+          <div class="delivery-note">
+            <h3>Стоимость</h3>
+            <p>Бесплатно при заказе от 10 000 ₽, иначе — от 390 ₽.</p>
+            <p>Точную стоимость показываем в корзине до оплаты.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section section-muted">
+        <div class="container">
+          <h2>О нас</h2>
+          <p>
+            Forsynka — команда специалистов по поставкам и клиентскому сервису.
+            Мы строим удобный и прозрачный опыт: от первого запроса до
+            доставки и сопровождения.
+          </p>
+        </div>
+      </section>
+
+      <section id="calculator" class="section">
+        <div class="container calculator-entry">
+          <h2>Калькулятор ремонта</h2>
+          <p>
+            Рассчитайте ориентировочную стоимость ремонта топливной аппаратуры
+            за пару кликов.
+          </p>
+          <button id="btn-open-calc" class="open-calc-main-btn" type="button">
+            Рассчитать стоимость ремонта
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <div id="calc-modal-overlay" class="calc-modal-overlay" aria-hidden="true">
+      <div class="repair-calculator-wrapper" role="dialog" aria-modal="true" aria-labelledby="calc-title">
+        <button id="btn-close-calc" class="close-btn" aria-label="Закрыть">&times;</button>
+        <h2 id="calc-title">Стоимость ремонта<br />топливной аппаратуры</h2>
+
+        <div class="form-group">
+          <label for="calc-brand">Выберите бренд аппаратуры:</label>
+          <select id="calc-brand">
+            <option value="5000">Cummins</option>
+            <option value="7500">Caterpillar</option>
+            <option value="6000">Volvo</option>
+            <option value="6000">Scania</option>
+            <option value="8000">Detroit</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="calc-qty">Количество штук (1 - 50):</label>
+          <input type="number" id="calc-qty" min="1" max="50" value="1" />
+        </div>
+
+        <div class="checkbox-group">
+          <label class="form-checkbox">
+            <input type="checkbox" id="calc-diag" />
+            <span>Требуется диагностика (+2 000 руб.)</span>
+          </label>
+          <label class="form-checkbox">
+            <input type="checkbox" id="calc-urgent" />
+            <span>Срочный ремонт (+30% к сумме)</span>
+          </label>
+        </div>
+
+        <div class="total-block">
+          <div class="total-label">Итоговая сумма</div>
+          <div class="total-price"><span id="calc-total">0</span> <span class="currency">руб.</span></div>
+        </div>
+
+        <button class="submit-btn" id="calc-submit" type="button">Оформить заявку</button>
+        <div class="success-message" id="calc-message">✅ Ваша заявка успешно оформлена!</div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <p>© 2026 Forsynka. Все права защищены.</p>
+        <nav aria-label="Юридическая информация">
+          <a href="catalog.html">Каталог</a>
+          <a href="privacy.html">Политика конфиденциальности</a>
+          <a href="cookies.html">Политика cookies</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
