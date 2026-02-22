@@ -1,0 +1,150 @@
+const products = [
+  { name: 'Форсунка 5234935', category: 'Распылитель 4991753-C1', price: 'от 2 200 ₽' },
+  { name: 'Форсунка 5235575', category: 'Распылитель 4991752-B5', price: 'от 2 200 ₽' },
+  { name: 'Форсунка 5235580', category: 'Распылитель 4991751-A1', price: 'от 2 200 ₽' },
+  { name: 'Форсунка 5236977', category: 'Распылитель 4991752-B3', price: 'от 2 200 ₽' },
+  { name: 'Форсунка 5237045', category: 'Распылитель 4991752-B4', price: 'от 2 200 ₽' },
+  { name: 'Форсунка 5237820', category: 'Распылитель 4991753-C1A', price: 'от 2 200 ₽' },
+  { name: 'Форсунка 414703002', category: 'Распылитель 0433175413', price: '3 300 ₽' },
+  { name: 'Форсунка 414703003', category: 'Распылитель 0433175414', price: '3 300 ₽' },
+  { name: '26210', category: 'External Seal Kit', price: '230 ₽' },
+  { name: '26209', category: 'Internal Injector Seal Repair Kit', price: '230 ₽' },
+  { name: '5230001', category: 'Injector Repair Kit', price: '1 600 ₽' },
+  { name: '23537111', category: 'External Injector Seal Kit N3', price: '620 ₽' },
+  { name: '4991459', category: 'Control Valve', price: '650 ₽' },
+  { name: '4991464', category: 'Spring', price: '210 ₽' },
+  { name: '4991466', category: 'Retainer', price: '250 ₽' },
+  { name: '4991465', category: 'Spacer', price: '1 100 ₽' }
+];
+
+const catalogGrid = document.getElementById('catalog-grid');
+const catalogTableBody = document.getElementById('catalog-table-body');
+const searchInput = document.getElementById('catalog-search');
+
+function renderCatalog(items) {
+  if (catalogTableBody) {
+    catalogTableBody.innerHTML = items
+      .map(
+        (item) => `
+          <tr>
+            <td>${item.name}</td>
+            <td>${item.category}</td>
+            <td>${item.price}</td>
+          </tr>
+        `
+      )
+      .join('');
+    if (catalogGrid) catalogGrid.innerHTML = '';
+    return;
+  }
+
+  if (!catalogGrid) return;
+
+  catalogGrid.innerHTML = items
+    .map(
+      (item) => `
+      <article class="product-card">
+        <h3>${item.name}</h3>
+        <p>${item.category}</p>
+        <p class="price">${item.price}</p>
+      </article>
+    `
+    )
+    .join('');
+}
+
+searchInput?.addEventListener('input', (event) => {
+  const query = event.target.value.trim().toLowerCase();
+  const filtered = products.filter((product) => {
+    return (
+      product.name.toLowerCase().includes(query) ||
+      product.category.toLowerCase().includes(query)
+    );
+  });
+  renderCatalog(filtered);
+});
+
+renderCatalog(products);
+
+const openModalBtn = document.getElementById('btn-open-calc');
+const closeModalBtn = document.getElementById('btn-close-calc');
+const modalOverlay = document.getElementById('calc-modal-overlay');
+const brandSelect = document.getElementById('calc-brand');
+const qtyInput = document.getElementById('calc-qty');
+const diagCheckbox = document.getElementById('calc-diag');
+const urgentCheckbox = document.getElementById('calc-urgent');
+const totalDisplay = document.getElementById('calc-total');
+const submitBtn = document.getElementById('calc-submit');
+const messageBox = document.getElementById('calc-message');
+
+function openModal() {
+  if (!modalOverlay) return;
+  modalOverlay.style.display = 'flex';
+  setTimeout(() => modalOverlay.classList.add('is-active'), 10);
+  modalOverlay.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('calc-modal-open');
+}
+
+function closeModal() {
+  if (!modalOverlay) return;
+  modalOverlay.classList.remove('is-active');
+  setTimeout(() => {
+    modalOverlay.style.display = 'none';
+    modalOverlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('calc-modal-open');
+  }, 300);
+}
+
+function calculateTotal() {
+  if (!brandSelect || !qtyInput || !totalDisplay) return;
+
+  const basePrice = parseFloat(brandSelect.value);
+  let qty = parseInt(qtyInput.value, 10);
+
+  if (Number.isNaN(qty) || qty < 1) qty = 1;
+  if (qty > 50) qty = 50;
+
+  let total = basePrice * qty;
+
+  if (diagCheckbox?.checked) total += 2000;
+  if (urgentCheckbox?.checked) total *= 1.3;
+
+  totalDisplay.textContent = Math.round(total).toLocaleString('ru-RU');
+}
+
+function validateQuantity() {
+  if (!qtyInput) return;
+  const qty = parseInt(qtyInput.value, 10);
+
+  if (Number.isNaN(qty) || qty < 1) {
+    qtyInput.value = '1';
+  } else if (qty > 50) {
+    qtyInput.value = '50';
+  }
+
+  calculateTotal();
+}
+
+openModalBtn?.addEventListener('click', openModal);
+closeModalBtn?.addEventListener('click', closeModal);
+modalOverlay?.addEventListener('click', (event) => {
+  if (event.target === modalOverlay) closeModal();
+});
+
+brandSelect?.addEventListener('change', calculateTotal);
+qtyInput?.addEventListener('input', calculateTotal);
+qtyInput?.addEventListener('change', validateQuantity);
+diagCheckbox?.addEventListener('change', calculateTotal);
+urgentCheckbox?.addEventListener('change', calculateTotal);
+
+submitBtn?.addEventListener('click', (event) => {
+  event.preventDefault();
+  if (messageBox) messageBox.style.display = 'block';
+
+  setTimeout(() => {
+    if (messageBox) messageBox.style.display = 'none';
+    closeModal();
+  }, 3000);
+});
+
+calculateTotal();

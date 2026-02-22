@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Каталог товаров — Forsynka</title>
+    <meta
+      name="description"
+      content="Отдельная страница каталога Forsynka с поиском по товарам и категориям."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-content">
+        <a href="index.html" class="brand">Forsynka</a>
+        <nav class="main-nav" aria-label="Основная навигация">
+          <a href="index.html#services">Услуги</a>
+          <a href="catalog.html">Каталог</a>
+          <a href="index.html#delivery">Доставка</a>
+          <a href="index.html#about">О нас</a>
+        </nav>
+        <a class="btn btn-ghost" href="index.html">На главную</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="section section-muted">
+        <div class="container">
+          <div class="section-head">
+            <h1>Каталог товаров</h1>
+            <label class="search">
+              <span class="visually-hidden">Поиск товара</span>
+              <input
+                id="catalog-search"
+                type="search"
+                placeholder="Найти товар..."
+                autocomplete="off"
+              />
+            </label>
+          </div>
+          <p>Подберите нужные позиции Detroit: данные каталога собраны из табличных данных страницы forsynka.ru/detroit.html и доступны с быстрым поиском.</p>
+          <div class="catalog-table-wrap" aria-live="polite">
+            <table class="catalog-table">
+              <thead>
+                <tr>
+                  <th>Артикул / номер</th>
+                  <th>Наименование</th>
+                  <th>Цена</th>
+                </tr>
+              </thead>
+              <tbody id="catalog-table-body"></tbody>
+            </table>
+          </div>
+          <div id="catalog-grid" class="catalog-grid" aria-live="polite"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <p>© 2026 Forsynka. Все права защищены.</p>
+        <nav aria-label="Юридическая информация">
+          <a href="catalog.html">Каталог</a>
+          <a href="privacy.html">Политика конфиденциальности</a>
+          <a href="cookies.html">Политика cookies</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="cookie-consent.js"></script>
+  </body>
+</html>
