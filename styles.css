@@ -52,6 +52,14 @@ body {
   font-weight: 800;
   text-decoration: none;
   letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+}
+
+.brand-logo {
+  height: 44px;
+  width: auto;
+  display: block;
 }
 
 .main-nav {
@@ -235,13 +243,15 @@ section[id] {
 .footer-content {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 1rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .footer-content nav {
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
 
 .policy-main {
@@ -261,6 +271,9 @@ section[id] {
 }
 
 @media (max-width: 920px) {
+  .brand-logo {
+    height: 36px;
+  }
   .hero-grid,
   .cards-grid,
   .catalog-grid,
@@ -270,6 +283,15 @@ section[id] {
 
   .main-nav {
     display: none;
+  }
+
+  .footer-content {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .footer-content nav {
+    flex-wrap: wrap;
   }
 }
 
