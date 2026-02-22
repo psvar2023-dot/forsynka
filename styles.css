@@ -158,6 +158,7 @@ section[id] {
   scroll-margin-top: 88px;
 }
 
+
 .section-muted {
   background: rgba(255, 255, 255, 0.02);
 }
@@ -193,6 +194,7 @@ section[id] {
   margin: 0.2rem 0 0;
   font-size: 0.95rem;
 }
+
 
 .catalog-grid {
   display: grid;
@@ -654,3 +656,4 @@ body.cookie-modal-open {
   border-color: #8faeff;
   color: #ffffff;
 }
+
