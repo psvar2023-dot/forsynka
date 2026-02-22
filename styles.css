@@ -84,6 +84,7 @@ body {
 }
 
 .btn-ghost {
+  background: transparent;
   color: var(--text);
   border-color: var(--border);
 }
