@@ -15,6 +15,38 @@ const products = [
   { name: '4991464', category: 'Spring', price: '210 ₽' },
   { name: '4991466', category: 'Retainer', price: '250 ₽' },
   { name: '4991465', category: 'Spacer', price: '1 100 ₽' }
+  { name: 'Форсунка 3411753/3095040', category: 'Распылитель 3095043', price: 'от 2 200 ₽' },
+  { name: 'Форсунка 3411754', category: 'Распылитель 3095729', price: 'от 2 200 ₽' },
+  { name: 'Форсунка 3411756', category: 'Распылитель 3609925', price: 'от 2 200 ₽' },
+  { name: 'Форсунка 3411764', category: 'Распылитель 3088175', price: 'от 2 200 ₽' },
+  { name: 'Форсунка 3411765', category: 'Распылитель 3411690', price: 'от 2 200 ₽' },
+  { name: 'Форсунка 3411766', category: 'Распылитель 3411694', price: 'от 2 200 ₽' },
+  { name: 'Форсунка 3411767', category: 'Распылитель 3411388', price: 'от 2 200 ₽' },
+  { name: 'Форсунка 4026222', category: 'Распылитель 4026225', price: 'от 2 200 ₽' },
+  { name: 'Форсунка 4061851', category: 'Распылитель 4061854', price: 'от 2 200 ₽' },
+  { name: 'Форсунка 4903472', category: 'Распылитель 4903475', price: 'от 2 200 ₽' },
+  { name: 'Форсунка 4903319', category: 'Распылитель 4903322', price: 'от 2 200 ₽' },
+  { name: 'Форсунка 4928171', category: 'Распылитель 4928174', price: 'от 2 200 ₽' },
+  { name: 'Форсунка 3652542', category: 'Распылитель 3076071', price: 'от 2 200 ₽' },
+  { name: '3060001', category: 'Injector Repair Kit', price: '2 100 ₽' },
+  { name: 'M11/N14', category: 'External O-Ring Kit', price: '0 ₽' },
+  { name: '26124', category: 'Installation Seal Kit', price: '450 ₽' },
+  { name: '26129', category: 'Injector Repair Kit', price: '1 300 ₽' },
+  { name: '3076256', category: 'Wiring Harness', price: '1 300 ₽' },
+  { name: 'ISXINJ', category: 'ISX external O-ring Kit', price: '300 ₽' },
+  { name: '3066736', category: 'Spacer injector spring', price: '1 100 ₽' },
+  { name: '3066738', category: 'Spring', price: '210 ₽' },
+  { name: '3067426', category: 'Retainer', price: '250 ₽' },
+  { name: 'O-ring', category: 'Все резинки', price: '290 ₽' },
+  { name: '3071967', category: 'Screen filter', price: '300 ₽' },
+  { name: '3411711', category: 'Barrel&Plunger Metal', price: 'от 2 300 ₽' },
+  {
+    name: '3411711',
+    category: 'Barrel&Plunger Metal Ceramic (с учётом возврата плунжера)',
+    price: '2 600 ₽'
+  },
+  { name: '3034407', category: 'Poppet Control Valve', price: '5 900 ₽' },
+  { name: '3072450', category: 'Barrel&Plunger (female)', price: 'от 2 300 ₽' }
 ];
 
 const catalogGrid = document.getElementById('catalog-grid');
