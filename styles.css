@@ -158,7 +158,6 @@ section[id] {
   scroll-margin-top: 88px;
 }
 
-
 .section-muted {
   background: rgba(255, 255, 255, 0.02);
 }
@@ -188,11 +187,6 @@ section[id] {
   border: 1px solid var(--border);
   background: #0d1018;
   color: var(--text);
-}
-
-.catalog-hint {
-  margin: 0.2rem 0 0;
-  font-size: 0.95rem;
 }
 
 
@@ -632,6 +626,11 @@ body.cookie-modal-open {
   color: #dce5ff;
   font-weight: 700;
   letter-spacing: 0.03em;
+  cursor: pointer;
+}
+
+.catalog-group-row:hover td {
+  background: rgba(91, 140, 255, 0.2);
 }
 
 .catalog-group-head {
@@ -656,4 +655,3 @@ body.cookie-modal-open {
   border-color: #8faeff;
   color: #ffffff;
 }
-

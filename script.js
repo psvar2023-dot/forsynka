@@ -106,8 +106,6 @@ const catalogGrid = document.getElementById('catalog-grid');
 const catalogTableBody = document.getElementById('catalog-table-body');
 const searchInput = document.getElementById('catalog-search');
 const collapsedGroups = {};
-const collapsedGroups = {};
-
 
 function getBrandAndCode(name) {
   const [brand, ...rest] = name.split(' ');
@@ -149,7 +147,6 @@ function renderCatalog(items) {
           .map(
             (item) => `
               <tr data-group-row="${group}" ${isCollapsed ? 'hidden' : ''}>
-
                 <td>${item.code}</td>
                 <td>${item.category}</td>
                 <td>${item.price}</td>
@@ -159,7 +156,7 @@ function renderCatalog(items) {
           .join('');
 
         return `
-          <tr class="catalog-group-row">
+          <tr class="catalog-group-row" data-group-header="${group}">
             <td colspan="3">
               <div class="catalog-group-head">
                 <span>${group}</span>
@@ -173,7 +170,6 @@ function renderCatalog(items) {
                 </button>
               </div>
             </td>
-
           </tr>
           ${bodyRows}
         `;
@@ -182,8 +178,16 @@ function renderCatalog(items) {
 
     const toggleButtons = catalogTableBody.querySelectorAll('[data-group-toggle]');
     toggleButtons.forEach((button) => {
-      button.addEventListener('click', () => {
+      button.addEventListener('click', (event) => {
+        event.stopPropagation();
         toggleCatalogGroup(button.dataset.groupToggle);
+      });
+    });
+
+    const groupHeaders = catalogTableBody.querySelectorAll('[data-group-header]');
+    groupHeaders.forEach((header) => {
+      header.addEventListener('click', () => {
+        toggleCatalogGroup(header.dataset.groupHeader);
       });
     });
 
