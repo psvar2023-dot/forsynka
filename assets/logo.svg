@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" role="img" aria-labelledby="title desc">
+  <title id="title">Forsynka.ru logo</title>
+  <desc id="desc">Stylized injector icon with FORSYNKA.RU text</desc>
+  <defs>
+    <linearGradient id="metal" x1="0" x2="1">
+      <stop offset="0" stop-color="#f4f7fb"/>
+      <stop offset="0.5" stop-color="#b8c2d0"/>
+      <stop offset="1" stop-color="#eaf0f7"/>
+    </linearGradient>
+  </defs>
+  <rect width="520" height="120" fill="none"/>
+  <g transform="translate(8 16)">
+    <rect x="0" y="24" width="150" height="24" rx="7" fill="#0b447a"/>
+    <rect x="72" y="17" width="56" height="38" rx="7" fill="url(#metal)" stroke="#0b447a" stroke-width="2"/>
+    <rect x="150" y="26" width="36" height="20" rx="4" fill="#f59100"/>
+    <polygon points="186,30 252,20 252,52 186,42" fill="#0b447a"/>
+    <polygon points="252,20 310,8 298,20 414,20 398,6 448,32 398,58 414,44 298,44 310,56 252,52" fill="#0b447a"/>
+    <polygon points="253,34 395,24 388,40" fill="#f59100"/>
+  </g>
+  <text x="8" y="110" font-size="52" font-family="Inter, Arial, sans-serif" font-weight="800" fill="#0b447a" letter-spacing="1">FORSYNKA</text>
+  <text x="338" y="110" font-size="52" font-family="Inter, Arial, sans-serif" font-weight="800" fill="#f59100">.RU</text>
+</svg>
