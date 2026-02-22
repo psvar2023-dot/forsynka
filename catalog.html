@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Каталог товаров — Forsynka</title>
+    <meta
+      name="description"
+      content="Отдельная страница каталога Forsynka с поиском по товарам и категориям."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-content">
+        <a href="index.html" class="brand">Forsynka</a>
+        <nav class="main-nav" aria-label="Основная навигация">
+          <a href="index.html#services">Услуги</a>
+          <a href="catalog.html">Каталог</a>
+          <a href="index.html#delivery">Доставка</a>
+          <a href="index.html#about">О нас</a>
+        </nav>
+        <a class="btn btn-ghost" href="index.html">На главную</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="section section-muted">
+        <div class="container">
+          <div class="section-head">
+            <h1>Каталог товаров</h1>
+            <label class="search">
+              <span class="visually-hidden">Поиск товара</span>
+              <input
+                id="catalog-search"
+                type="search"
+                placeholder="Найти товар..."
+                autocomplete="off"
+              />
+            </label>
+          </div>
+          <p class="catalog-hint">Категории можно сворачивать кнопками «Свернуть» и «Развернуть».</p>
+          <div class="catalog-table-wrap" aria-live="polite">
+            <table class="catalog-table">
+              <thead>
+                <tr>
+                  <th>Артикул / номер</th>
+                  <th>Наименование</th>
+                  <th>Цена</th>
+                </tr>
+              </thead>
+              <tbody id="catalog-table-body">
+                <tr class="catalog-group-row"><td colspan="3">Cummins</td></tr>
+                <tr><td>3411753/3095040</td><td>Распылитель 3095043</td><td>от 2 200 ₽</td></tr>
+                <tr><td>3411754</td><td>Распылитель 3095729</td><td>от 2 200 ₽</td></tr>
+                <tr><td>3411756</td><td>Распылитель 3609925</td><td>от 2 200 ₽</td></tr>
+                <tr><td>3411764</td><td>Распылитель 3088175</td><td>от 2 200 ₽</td></tr>
+                <tr><td>3411765</td><td>Распылитель 3411690</td><td>от 2 200 ₽</td></tr>
+                <tr><td>3411766</td><td>Распылитель 3411694</td><td>от 2 200 ₽</td></tr>
+                <tr><td>3411767</td><td>Распылитель 3411388</td><td>от 2 200 ₽</td></tr>
+                <tr><td>4026222</td><td>Распылитель 4026225</td><td>от 2 200 ₽</td></tr>
+                <tr><td>4061851</td><td>Распылитель 4061854</td><td>от 2 200 ₽</td></tr>
+                <tr><td>4903472</td><td>Распылитель 4903475</td><td>от 2 200 ₽</td></tr>
+                <tr><td>4903319</td><td>Распылитель 4903322</td><td>от 2 200 ₽</td></tr>
+                <tr><td>4928171</td><td>Распылитель 4928174</td><td>от 2 200 ₽</td></tr>
+                <tr><td>3652542</td><td>Распылитель 3076071</td><td>от 2 200 ₽</td></tr>
+                <tr><td>3060001</td><td>Injector Repair Kit</td><td>2 100 ₽</td></tr>
+                <tr><td>M11/N14</td><td>External O-Ring Kit</td><td>0 ₽</td></tr>
+                <tr><td>26124</td><td>Installation Seal Kit</td><td>450 ₽</td></tr>
+                <tr><td>26129</td><td>Injector Repair Kit</td><td>1 300 ₽</td></tr>
+                <tr><td>3076256</td><td>Wiring Harness</td><td>1 300 ₽</td></tr>
+                <tr><td>ISXINJ</td><td>ISX external O-ring Kit</td><td>300 ₽</td></tr>
+                <tr><td>3066736</td><td>Spacer injector spring</td><td>1 100 ₽</td></tr>
+                <tr><td>3066738</td><td>Spring</td><td>210 ₽</td></tr>
+                <tr><td>3067426</td><td>Retainer</td><td>250 ₽</td></tr>
+                <tr><td>O-ring</td><td>Все резинки</td><td>290 ₽</td></tr>
+                <tr><td>3071967</td><td>Screen filter</td><td>300 ₽</td></tr>
+                <tr><td>3411711</td><td>Barrel&Plunger Metal</td><td>от 2 300 ₽</td></tr>
+                <tr><td>3411711</td><td>Barrel&Plunger Metal Ceramic</td><td>2 600 ₽</td></tr>
+                <tr><td>3034407</td><td>Poppet Control Valve</td><td>5 900 ₽</td></tr>
+                <tr><td>3072450</td><td>Barrel&Plunger (female)</td><td>от 2 300 ₽</td></tr>
+
+                <tr class="catalog-group-row"><td colspan="3">Detroit</td></tr>
+                <tr><td>5234935</td><td>Распылитель 4991753-C1</td><td>от 2 200 ₽</td></tr>
+                <tr><td>5235575</td><td>Распылитель 4991752-B5</td><td>от 2 200 ₽</td></tr>
+                <tr><td>5235580</td><td>Распылитель 4991751-A1</td><td>от 2 200 ₽</td></tr>
+                <tr><td>5236977</td><td>Распылитель 4991752-B3</td><td>от 2 200 ₽</td></tr>
+                <tr><td>5237045</td><td>Распылитель 4991752-B4</td><td>от 2 200 ₽</td></tr>
+                <tr><td>5237820</td><td>Распылитель 4991753-C1A</td><td>от 2 200 ₽</td></tr>
+                <tr><td>414703002</td><td>Распылитель 0433175413</td><td>3 300 ₽</td></tr>
+                <tr><td>414703003</td><td>Распылитель 0433175414</td><td>3 300 ₽</td></tr>
+                <tr><td>26210</td><td>External Seal Kit</td><td>230 ₽</td></tr>
+                <tr><td>26209</td><td>Internal Injector Seal Repair Kit</td><td>230 ₽</td></tr>
+                <tr><td>5230001</td><td>Injector Repair Kit</td><td>1 600 ₽</td></tr>
+                <tr><td>23537111</td><td>External Injector Seal Kit N3</td><td>620 ₽</td></tr>
+                <tr><td>4991459</td><td>Control Valve</td><td>650 ₽</td></tr>
+                <tr><td>4991464</td><td>Spring</td><td>210 ₽</td></tr>
+                <tr><td>4991466</td><td>Retainer</td><td>250 ₽</td></tr>
+                <tr><td>4991465</td><td>Spacer</td><td>1 100 ₽</td></tr>
+
+                <tr class="catalog-group-row"><td colspan="3">Caterpillar</td></tr>
+                <tr><td>10R0781/198-6605/222-5926/222-5966/197-7107/199-6065</td><td>распылитель 41036/32</td><td>3 100 ₽</td></tr>
+                <tr><td>10R0782/177-4754/178-0198/178-0199/205-1285</td><td>распылитель 41046/32</td><td>3 100 ₽</td></tr>
+                <tr><td>Piston</td><td>Piston</td><td>850 ₽</td></tr>
+                <tr><td>Plunger</td><td>Plunger</td><td>2 600 ₽</td></tr>
+                <tr><td>11956</td><td>Check Valve</td><td>2 200 ₽</td></tr>
+                <tr><td>0530</td><td>Internal Seal Kit</td><td>300 ₽</td></tr>
+                <tr><td>2421539</td><td>External Seal Kit</td><td>1 150 ₽</td></tr>
+                <tr><td>183074C92</td><td>External Seal Kit</td><td>650 ₽</td></tr>
+                <tr><td>10R2781/10R0957/0R9257/211-3023/191-3003/140-8993</td><td>распылитель C15/3406</td><td>от 4 400 ₽</td></tr>
+                <tr><td>10R2780/0R4668/0R9258/211-3024/10R0959/117-1146</td><td>распылитель C15/3406</td><td>от 4 400 ₽</td></tr>
+                <tr><td>10R2782/118-7929/117-0481/10R0956/211-3022/0R9256</td><td>распылитель C15/3406</td><td>от 4 400 ₽</td></tr>
+                <tr><td>10R1273/10R1000/249-0708/249-0709/239-4909/232-1199</td><td>распылитель C15/3406</td><td>от 4 400 ₽</td></tr>
+                <tr><td>10R0963/212-3463/194-5083/10R9235/0R8773/0R4897</td><td>распылитель C12/3196</td><td>от 4 400 ₽</td></tr>
+                <tr><td>249-0708/10R2977</td><td>распылитель C12/C13</td><td>от 4 400 ₽</td></tr>
+                <tr><td>2123467/10R1259</td><td>распылитель C10</td><td>от 4 400 ₽</td></tr>
+                <tr><td>Solenoid Kit</td><td>Solenoid Kit</td><td>220 ₽</td></tr>
+                <tr><td>RTF26300</td><td>External Kit C15(3406)</td><td>420 ₽</td></tr>
+                <tr><td>RTF26301</td><td>External Kit C12(3196)</td><td>620 ₽</td></tr>
+
+                <tr class="catalog-group-row"><td colspan="3">Volvo/Scania/Iveco</td></tr>
+                <tr><td>7135-588</td><td>Клапан Delphi E3</td><td>10 100 ₽</td></tr>
+                <tr><td>7206-0379</td><td>Клапан Delphi E1</td><td>7 600 ₽</td></tr>
+                <tr><td>без номера</td><td>Пружина распылителя</td><td>260 ₽</td></tr>
+                <tr><td>без номера</td><td>Проставка пружины "грибок", деталь комплекта 7135-487</td><td>120 ₽</td></tr>
+                <tr><td>без номера</td><td>Проставка распылителя, деталь комплекта 7135-487</td><td>410 ₽</td></tr>
+                <tr><td>без номера</td><td>Наружные уплотнения</td><td>180 ₽</td></tr>
+                <tr><td>7135-486</td><td>Клапан Delphi</td><td>9 800 ₽</td></tr>
+                <tr><td>без номера</td><td>Пружина распылителя</td><td>160 ₽</td></tr>
+                <tr><td>7135-488</td><td>Ремкомплект (аналог)</td><td>700 ₽</td></tr>
+                <tr><td>без номера</td><td>Проставка пружины "грибок", деталь комплекта 7135-487</td><td>120 ₽</td></tr>
+                <tr><td>без номера</td><td>Проставка распылителя, деталь комплекта 7135-487</td><td>410 ₽</td></tr>
+                <tr><td>без номера</td><td>Наружные уплотнения 4 резинки</td><td>180 ₽</td></tr>
+                <tr><td>2434514040</td><td>Пружина распылителя (аналог)</td><td>150 ₽</td></tr>
+                <tr><td>F00ZB20001</td><td>Проставка пружины "грибок" (аналог)</td><td>80 ₽</td></tr>
+                <tr><td>F018B06804</td><td>Проставка распылителя (аналог)</td><td>600 ₽</td></tr>
+                <tr><td>F00HN37927</td><td>Внутренний р/к</td><td>110 ₽</td></tr>
+                <tr><td>F00HN37928</td><td>Внутренний р/к (аналог)</td><td>190 ₽</td></tr>
+                <tr><td>F00VX99999</td><td>Наружные уплотнения Scania (аналог)</td><td>210 ₽</td></tr>
+                <tr><td>F00VX99995</td><td>Наружные уплотнения Iveco (аналог)</td><td>200 ₽</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="catalog-grid" class="catalog-grid" aria-live="polite"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <p>© 2026 Forsynka. Все права защищены.</p>
+        <nav aria-label="Юридическая информация">
+          <a href="catalog.html">Каталог</a>
+          <a href="privacy.html">Политика конфиденциальности</a>
+          <a href="cookies.html">Политика cookies</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="cookie-consent.js"></script>
+  </body>
+</html>
