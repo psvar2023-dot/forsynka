@@ -54,11 +54,14 @@ body {
   letter-spacing: 0.02em;
   display: inline-flex;
   align-items: center;
+  line-height: 0;
+  flex-shrink: 0;
 }
 
 .brand-logo {
-  height: 44px;
-  width: auto;
+  width: min(340px, 42vw);
+  height: auto;
+  max-height: 96px;
   display: block;
 }
 
@@ -272,7 +275,8 @@ section[id] {
 
 @media (max-width: 920px) {
   .brand-logo {
-    height: 36px;
+    width: min(260px, 58vw);
+    max-height: 72px;
   }
   .hero-grid,
   .cards-grid,
