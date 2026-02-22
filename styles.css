@@ -54,14 +54,23 @@ body {
   letter-spacing: 0.02em;
   display: inline-flex;
   align-items: center;
-  line-height: 0;
+  line-height: 1.1;
   flex-shrink: 0;
 }
 
-.brand-logo {
-  width: min(340px, 42vw);
-  height: auto;
-  max-height: 96px;
+.header-max-icon {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+}
+
+.header-max-icon img {
+  width: 30px;
+  height: 30px;
   display: block;
 }
 
@@ -274,10 +283,6 @@ section[id] {
 }
 
 @media (max-width: 920px) {
-  .brand-logo {
-    width: min(260px, 58vw);
-    max-height: 72px;
-  }
   .hero-grid,
   .cards-grid,
   .catalog-grid,
@@ -683,29 +688,3 @@ body.cookie-modal-open {
 }
 
 
-.max-chat-widget {
-  position: fixed;
-  right: 1rem;
-  bottom: 1rem;
-  z-index: 60;
-  padding: 0.75rem 1rem;
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 700;
-  color: #fff;
-  background: linear-gradient(120deg, #ff9e2c, #f59100);
-  box-shadow: 0 10px 24px rgba(245, 145, 0, 0.35);
-}
-
-.max-chat-widget:hover {
-  filter: brightness(1.05);
-}
-
-@media (max-width: 640px) {
-  .max-chat-widget {
-    right: 0.75rem;
-    bottom: 0.75rem;
-    padding: 0.65rem 0.9rem;
-    font-size: 0.9rem;
-  }
-}
