@@ -614,3 +614,10 @@ body.cookie-modal-open {
     align-items: flex-start;
   }
 }
+
+.catalog-group-row td {
+  background: rgba(91, 140, 255, 0.14);
+  color: #dce5ff;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
