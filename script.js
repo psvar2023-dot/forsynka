@@ -105,7 +105,10 @@ const products = [
 const catalogGrid = document.getElementById('catalog-grid');
 const catalogTableBody = document.getElementById('catalog-table-body');
 const searchInput = document.getElementById('catalog-search');
+<<<<<<< codex/create-modern-website-with-catalog-and-delivery-39ehcy
 const collapsedGroups = {};
+=======
+>>>>>>> main
 
 function getBrandAndCode(name) {
   const [brand, ...rest] = name.split(' ');
@@ -115,6 +118,7 @@ function getBrandAndCode(name) {
   };
 }
 
+<<<<<<< codex/create-modern-website-with-catalog-and-delivery-39ehcy
 function toggleCatalogGroup(group) {
   collapsedGroups[group] = !collapsedGroups[group];
 
@@ -130,6 +134,8 @@ function toggleCatalogGroup(group) {
   }
 }
 
+=======
+>>>>>>> main
 function renderCatalog(items) {
   if (catalogTableBody) {
     const grouped = items.reduce((acc, item) => {
@@ -142,11 +148,18 @@ function renderCatalog(items) {
 
     catalogTableBody.innerHTML = Object.entries(grouped)
       .map(([group, rows]) => {
+<<<<<<< codex/create-modern-website-with-catalog-and-delivery-39ehcy
         const isCollapsed = Boolean(collapsedGroups[group]);
         const bodyRows = rows
           .map(
             (item) => `
               <tr data-group-row="${group}" ${isCollapsed ? 'hidden' : ''}>
+=======
+        const bodyRows = rows
+          .map(
+            (item) => `
+              <tr>
+>>>>>>> main
                 <td>${item.code}</td>
                 <td>${item.category}</td>
                 <td>${item.price}</td>
@@ -157,6 +170,7 @@ function renderCatalog(items) {
 
         return `
           <tr class="catalog-group-row">
+<<<<<<< codex/create-modern-website-with-catalog-and-delivery-39ehcy
             <td colspan="3">
               <div class="catalog-group-head">
                 <span>${group}</span>
@@ -170,12 +184,16 @@ function renderCatalog(items) {
                 </button>
               </div>
             </td>
+=======
+            <td colspan="3">${group}</td>
+>>>>>>> main
           </tr>
           ${bodyRows}
         `;
       })
       .join('');
 
+<<<<<<< codex/create-modern-website-with-catalog-and-delivery-39ehcy
     const toggleButtons = catalogTableBody.querySelectorAll('[data-group-toggle]');
     toggleButtons.forEach((button) => {
       button.addEventListener('click', () => {
@@ -183,6 +201,8 @@ function renderCatalog(items) {
       });
     });
 
+=======
+>>>>>>> main
     if (catalogGrid) catalogGrid.innerHTML = '';
     return;
   }

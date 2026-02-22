@@ -153,11 +153,14 @@ li {
   padding: 3.2rem 0;
 }
 
+<<<<<<< codex/create-modern-website-with-catalog-and-delivery-39ehcy
 /* Учитываем sticky-header при переходах по якорям */
 section[id] {
   scroll-margin-top: 88px;
 }
 
+=======
+>>>>>>> main
 .section-muted {
   background: rgba(255, 255, 255, 0.02);
 }
@@ -189,11 +192,14 @@ section[id] {
   color: var(--text);
 }
 
+<<<<<<< codex/create-modern-website-with-catalog-and-delivery-39ehcy
 .catalog-hint {
   margin: 0.2rem 0 0;
   font-size: 0.95rem;
 }
 
+=======
+>>>>>>> main
 .catalog-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -631,6 +637,7 @@ body.cookie-modal-open {
   font-weight: 700;
   letter-spacing: 0.03em;
 }
+<<<<<<< codex/create-modern-website-with-catalog-and-delivery-39ehcy
 
 .catalog-group-head {
   display: flex;
@@ -654,3 +661,5 @@ body.cookie-modal-open {
   border-color: #8faeff;
   color: #ffffff;
 }
+=======
+>>>>>>> main
