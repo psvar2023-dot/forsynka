@@ -64,6 +64,42 @@ const products = [
   { name: 'Caterpillar Solenoid Kit', category: 'Solenoid Kit', price: '220 ₽' },
   { name: 'Caterpillar RTF26300', category: 'External Kit C15(3406)', price: '420 ₽' },
   { name: 'Caterpillar RTF26301', category: 'External Kit C12(3196)', price: '620 ₽' },
+
+  { name: 'Volvo/Scania/Iveco 7135-588', category: 'Клапан Delphi E3', price: '10 100 ₽' },
+  { name: 'Volvo/Scania/Iveco 7206-0379', category: 'Клапан Delphi E1', price: '7 600 ₽' },
+  { name: 'Volvo/Scania/Iveco без номера', category: 'Пружина распылителя', price: '260 ₽' },
+  {
+    name: 'Volvo/Scania/Iveco без номера',
+    category: 'Проставка пружины "грибок", деталь комплекта 7135-487',
+    price: '120 ₽'
+  },
+  {
+    name: 'Volvo/Scania/Iveco без номера',
+    category: 'Проставка распылителя, деталь комплекта 7135-487',
+    price: '410 ₽'
+  },
+  { name: 'Volvo/Scania/Iveco без номера', category: 'Наружные уплотнения', price: '180 ₽' },
+  { name: 'Volvo/Scania/Iveco 7135-486', category: 'Клапан Delphi', price: '9 800 ₽' },
+  { name: 'Volvo/Scania/Iveco без номера', category: 'Пружина распылителя', price: '160 ₽' },
+  { name: 'Volvo/Scania/Iveco 7135-488', category: 'Ремкомплект (аналог)', price: '700 ₽' },
+  {
+    name: 'Volvo/Scania/Iveco без номера',
+    category: 'Проставка пружины "грибок", деталь комплекта 7135-487',
+    price: '120 ₽'
+  },
+  {
+    name: 'Volvo/Scania/Iveco без номера',
+    category: 'Проставка распылителя, деталь комплекта 7135-487',
+    price: '410 ₽'
+  },
+  { name: 'Volvo/Scania/Iveco без номера', category: 'Наружные уплотнения 4 резинки', price: '180 ₽' },
+  { name: 'Volvo/Scania/Iveco 2434514040', category: 'Пружина распылителя (аналог)', price: '150 ₽' },
+  { name: 'Volvo/Scania/Iveco F00ZB20001', category: 'Проставка пружины "грибок" (аналог)', price: '80 ₽' },
+  { name: 'Volvo/Scania/Iveco F018B06804', category: 'Проставка распылителя (аналог)', price: '600 ₽' },
+  { name: 'Volvo/Scania/Iveco F00HN37927', category: 'Внутренний р/к', price: '110 ₽' },
+  { name: 'Volvo/Scania/Iveco F00HN37928', category: 'Внутренний р/к (аналог)', price: '190 ₽' },
+  { name: 'Volvo/Scania/Iveco F00VX99999', category: 'Наружные уплотнения Scania (аналог)', price: '210 ₽' },
+  { name: 'Volvo/Scania/Iveco F00VX99995', category: 'Наружные уплотнения Iveco (аналог)', price: '200 ₽' },
 ];
 
 const catalogGrid = document.getElementById('catalog-grid');
