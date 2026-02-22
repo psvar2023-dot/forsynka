@@ -58,12 +58,10 @@ body {
   flex-shrink: 0;
 }
 
-.brand-active {
-  color: #ffffff;
-}
-
-.brand-active:hover {
-  color: #cfd9ff;
+.brand-logo {
+  width: 156px;
+  height: auto;
+  display: block;
 }
 
 .header-max-icon {
