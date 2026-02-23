@@ -251,10 +251,11 @@ async function loadCatalogFromSupabase() {
 
   const productsTable = window.SUPABASE_PRODUCTS_TABLE || 'products';
 
-  const { data, error } = await client
+  const supabase = client;
+
+  const { data, error } = await supabase
     .from(productsTable)
-    .select('name, category, price, brand, code, article')
-    .order('brand', { ascending: true })
+    .select('article, name, price')
     .order('name', { ascending: true });
 
   if (error || !Array.isArray(data) || data.length === 0) {
@@ -263,19 +264,10 @@ async function loadCatalogFromSupabase() {
   }
 
   catalogProducts = data.map((item) => {
-    const normalizedName =
-      item.name ||
-      [item.brand, item.code]
-        .filter(Boolean)
-        .join(' ')
-        .trim() ||
-      'Без названия';
-
     return {
-      name: normalizedName,
-      brand: item.brand || null,
-      article: item.article || item.code || null,
-      category: item.category || 'Без категории',
+      name: item.name || 'Без названия',
+      article: item.article || null,
+      category: 'Товар из Supabase',
       price: item.price || 'По запросу'
     };
   });
