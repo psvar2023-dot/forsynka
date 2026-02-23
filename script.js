@@ -235,44 +235,53 @@ searchInput?.addEventListener('input', (event) => {
 async function loadCatalogFromSupabase() {
   if (!hasCatalog) return;
 
-  const client =
-    window.supabase &&
-    window.SUPABASE_URL &&
-    window.SUPABASE_ANON_KEY &&
-    !window.SUPABASE_URL.includes('YOUR_PROJECT_REF') &&
-    !window.SUPABASE_ANON_KEY.includes('YOUR_SUPABASE_ANON_KEY')
-      ? window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY)
-      : null;
+  const supabaseUrl = window.SUPABASE_URL;
+  const supabaseKey = window.SUPABASE_ANON_KEY;
 
-  if (!client) {
+  if (
+    !supabaseUrl ||
+    !supabaseKey ||
+    supabaseUrl.includes('YOUR_PROJECT_REF') ||
+    supabaseKey.includes('YOUR_SUPABASE_ANON_KEY')
+  ) {
     renderCatalog(catalogProducts);
     return;
   }
 
   const productsTable = window.SUPABASE_PRODUCTS_TABLE || 'products';
+  const endpoint = `${supabaseUrl}/rest/v1/${productsTable}?select=article,name,price&order=name.asc`;
 
-  const supabase = client;
+  try {
+    const response = await fetch(endpoint, {
+      headers: {
+        apikey: supabaseKey,
+        Authorization: `Bearer ${supabaseKey}`
+      }
+    });
 
-  const { data, error } = await supabase
-    .from(productsTable)
-    .select('article, name, price')
-    .order('name', { ascending: true });
+    if (!response.ok) {
+      renderCatalog(catalogProducts);
+      return;
+    }
 
-  if (error || !Array.isArray(data) || data.length === 0) {
-    renderCatalog(catalogProducts);
-    return;
-  }
+    const data = await response.json();
 
-  catalogProducts = data.map((item) => {
-    return {
+    if (!Array.isArray(data) || data.length === 0) {
+      renderCatalog(catalogProducts);
+      return;
+    }
+
+    catalogProducts = data.map((item) => ({
       name: item.name || 'Без названия',
       article: item.article || null,
       category: 'Товар из Supabase',
       price: item.price || 'По запросу'
-    };
-  });
+    }));
 
-  renderCatalog(filterCatalog(searchInput?.value || ''));
+    renderCatalog(filterCatalog(searchInput?.value || ''));
+  } catch (error) {
+    renderCatalog(catalogProducts);
+  }
 }
 
 loadCatalogFromSupabase();
