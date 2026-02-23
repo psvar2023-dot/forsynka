@@ -107,11 +107,13 @@ const catalogTableBody = document.getElementById('catalog-table-body');
 const searchInput = document.getElementById('catalog-search');
 const collapsedGroups = {};
 
-function getBrandAndCode(name) {
-  const [brand, ...rest] = name.split(' ');
+function getBrandAndArticle(item) {
+  const sourceName = item.name || '';
+  const [parsedBrand, ...rest] = sourceName.split(' ');
+
   return {
-    brand,
-    code: rest.join(' ') || name
+    brand: item.brand || parsedBrand || 'Без бренда',
+    article: item.article || item.code || rest.join(' ') || sourceName || 'без номера'
   };
 }
 
@@ -133,10 +135,10 @@ function toggleCatalogGroup(group) {
 function renderCatalog(items) {
   if (catalogTableBody) {
     const grouped = items.reduce((acc, item) => {
-      const parsed = getBrandAndCode(item.name);
+      const parsed = getBrandAndArticle(item);
       const group = parsed.brand;
       if (!acc[group]) acc[group] = [];
-      acc[group].push({ ...item, code: parsed.code });
+      acc[group].push({ ...item, article: parsed.article });
       return acc;
     }, {});
 
@@ -147,7 +149,7 @@ function renderCatalog(items) {
           .map(
             (item) => `
               <tr data-group-row="${group}" ${isCollapsed ? 'hidden' : ''}>
-                <td>${item.code}</td>
+                <td>${item.article}</td>
                 <td>${item.category}</td>
                 <td>${item.price}</td>
               </tr>
@@ -210,18 +212,79 @@ function renderCatalog(items) {
     .join('');
 }
 
-searchInput?.addEventListener('input', (event) => {
-  const query = event.target.value.trim().toLowerCase();
-  const filtered = products.filter((product) => {
+const hasCatalog = Boolean(catalogTableBody || catalogGrid);
+let catalogProducts = [...products];
+
+function filterCatalog(query) {
+  const normalized = query.trim().toLowerCase();
+  if (!normalized) return catalogProducts;
+
+  return catalogProducts.filter((product) => {
     return (
-      product.name.toLowerCase().includes(query) ||
-      product.category.toLowerCase().includes(query)
+      product.name.toLowerCase().includes(normalized) ||
+      product.category.toLowerCase().includes(normalized) ||
+      String(product.article || product.code || '').toLowerCase().includes(normalized)
     );
   });
-  renderCatalog(filtered);
+}
+
+searchInput?.addEventListener('input', (event) => {
+  renderCatalog(filterCatalog(event.target.value));
 });
 
-renderCatalog(products);
+async function loadCatalogFromSupabase() {
+  if (!hasCatalog) return;
+
+  const supabaseUrl = window.SUPABASE_URL;
+  const supabaseKey = window.SUPABASE_ANON_KEY;
+
+  if (
+    !supabaseUrl ||
+    !supabaseKey ||
+    supabaseUrl.includes('YOUR_PROJECT_REF') ||
+    supabaseKey.includes('YOUR_SUPABASE_ANON_KEY')
+  ) {
+    renderCatalog(catalogProducts);
+    return;
+  }
+
+  const productsTable = window.SUPABASE_PRODUCTS_TABLE || 'products';
+  const endpoint = `${supabaseUrl}/rest/v1/${productsTable}?select=article,name,price&order=name.asc`;
+
+  try {
+    const response = await fetch(endpoint, {
+      headers: {
+        apikey: supabaseKey,
+        Authorization: `Bearer ${supabaseKey}`
+      }
+    });
+
+    if (!response.ok) {
+      renderCatalog(catalogProducts);
+      return;
+    }
+
+    const data = await response.json();
+
+    if (!Array.isArray(data) || data.length === 0) {
+      renderCatalog(catalogProducts);
+      return;
+    }
+
+    catalogProducts = data.map((item) => ({
+      name: item.name || 'Без названия',
+      article: item.article || null,
+      category: 'Товар из Supabase',
+      price: item.price || 'По запросу'
+    }));
+
+    renderCatalog(filterCatalog(searchInput?.value || ''));
+  } catch (error) {
+    renderCatalog(catalogProducts);
+  }
+}
+
+loadCatalogFromSupabase();
 
 const openModalBtn = document.getElementById('btn-open-calc');
 const closeModalBtn = document.getElementById('btn-close-calc');
@@ -294,14 +357,65 @@ qtyInput?.addEventListener('change', validateQuantity);
 diagCheckbox?.addEventListener('change', calculateTotal);
 urgentCheckbox?.addEventListener('change', calculateTotal);
 
-submitBtn?.addEventListener('click', (event) => {
+function getSupabaseClient() {
+  if (
+    !window.supabase ||
+    !window.SUPABASE_URL ||
+    !window.SUPABASE_ANON_KEY ||
+    window.SUPABASE_URL.includes('YOUR_PROJECT_REF') ||
+    window.SUPABASE_ANON_KEY.includes('YOUR_SUPABASE_ANON_KEY')
+  ) {
+    return null;
+  }
+
+  return window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+}
+
+const supabaseClient = getSupabaseClient();
+
+function showFormMessage(text, isError = false) {
+  if (!messageBox) return;
+  messageBox.textContent = text;
+  messageBox.style.display = 'block';
+  messageBox.style.background = isError ? '#fef2f2' : '#ecfdf3';
+  messageBox.style.color = isError ? '#991b1b' : '#166534';
+}
+
+submitBtn?.addEventListener('click', async (event) => {
   event.preventDefault();
-  if (messageBox) messageBox.style.display = 'block';
+
+  if (!supabaseClient) {
+    showFormMessage('⚠️ Подключите Supabase: заполните SUPABASE_URL и SUPABASE_ANON_KEY в supabase-config.js.', true);
+    return;
+  }
+
+  if (!brandSelect || !qtyInput || !diagCheckbox || !urgentCheckbox || !totalDisplay) return;
+
+  submitBtn.disabled = true;
+
+  const requestPayload = {
+    brand: brandSelect.options[brandSelect.selectedIndex]?.text || 'Не указан',
+    quantity: parseInt(qtyInput.value, 10) || 1,
+    diagnostics: Boolean(diagCheckbox.checked),
+    urgent: Boolean(urgentCheckbox.checked),
+    total: parseInt((totalDisplay.textContent || '0').replace(/\s+/g, ''), 10) || 0
+  };
+
+  const { error } = await supabaseClient.from('repair_requests').insert(requestPayload);
+
+  if (error) {
+    showFormMessage(`❌ Ошибка отправки: ${error.message}`, true);
+    submitBtn.disabled = false;
+    return;
+  }
+
+  showFormMessage('✅ Ваша заявка успешно отправлена!');
 
   setTimeout(() => {
     if (messageBox) messageBox.style.display = 'none';
     closeModal();
-  }, 3000);
+    submitBtn.disabled = false;
+  }, 2500);
 });
 
 calculateTotal();
