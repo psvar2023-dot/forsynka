@@ -246,8 +246,10 @@ async function loadCatalogFromSupabase() {
     return;
   }
 
+  const productsTable = window.SUPABASE_PRODUCTS_TABLE || 'products';
+
   const { data, error } = await client
-    .from('products')
+    .from(productsTable)
     .select('name, category, price, brand, code')
     .order('brand', { ascending: true })
     .order('name', { ascending: true });
