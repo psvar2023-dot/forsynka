@@ -107,11 +107,13 @@ const catalogTableBody = document.getElementById('catalog-table-body');
 const searchInput = document.getElementById('catalog-search');
 const collapsedGroups = {};
 
-function getBrandAndCode(name) {
-  const [brand, ...rest] = name.split(' ');
+function getBrandAndArticle(item) {
+  const sourceName = item.name || '';
+  const [parsedBrand, ...rest] = sourceName.split(' ');
+
   return {
-    brand,
-    code: rest.join(' ') || name
+    brand: item.brand || parsedBrand || 'Без бренда',
+    article: item.article || item.code || rest.join(' ') || sourceName || 'без номера'
   };
 }
 
@@ -133,10 +135,10 @@ function toggleCatalogGroup(group) {
 function renderCatalog(items) {
   if (catalogTableBody) {
     const grouped = items.reduce((acc, item) => {
-      const parsed = getBrandAndCode(item.name);
+      const parsed = getBrandAndArticle(item);
       const group = parsed.brand;
       if (!acc[group]) acc[group] = [];
-      acc[group].push({ ...item, code: parsed.code });
+      acc[group].push({ ...item, article: parsed.article });
       return acc;
     }, {});
 
@@ -147,7 +149,7 @@ function renderCatalog(items) {
           .map(
             (item) => `
               <tr data-group-row="${group}" ${isCollapsed ? 'hidden' : ''}>
-                <td>${item.code}</td>
+                <td>${item.article}</td>
                 <td>${item.category}</td>
                 <td>${item.price}</td>
               </tr>
@@ -220,7 +222,8 @@ function filterCatalog(query) {
   return catalogProducts.filter((product) => {
     return (
       product.name.toLowerCase().includes(normalized) ||
-      product.category.toLowerCase().includes(normalized)
+      product.category.toLowerCase().includes(normalized) ||
+      String(product.article || product.code || '').toLowerCase().includes(normalized)
     );
   });
 }
@@ -250,7 +253,7 @@ async function loadCatalogFromSupabase() {
 
   const { data, error } = await client
     .from(productsTable)
-    .select('name, category, price, brand, code')
+    .select('name, category, price, brand, code, article')
     .order('brand', { ascending: true })
     .order('name', { ascending: true });
 
@@ -270,6 +273,8 @@ async function loadCatalogFromSupabase() {
 
     return {
       name: normalizedName,
+      brand: item.brand || null,
+      article: item.article || item.code || null,
       category: item.category || 'Без категории',
       price: item.price || 'По запросу'
     };
