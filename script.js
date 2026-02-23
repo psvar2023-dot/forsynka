@@ -210,18 +210,73 @@ function renderCatalog(items) {
     .join('');
 }
 
-searchInput?.addEventListener('input', (event) => {
-  const query = event.target.value.trim().toLowerCase();
-  const filtered = products.filter((product) => {
+const hasCatalog = Boolean(catalogTableBody || catalogGrid);
+let catalogProducts = [...products];
+
+function filterCatalog(query) {
+  const normalized = query.trim().toLowerCase();
+  if (!normalized) return catalogProducts;
+
+  return catalogProducts.filter((product) => {
     return (
-      product.name.toLowerCase().includes(query) ||
-      product.category.toLowerCase().includes(query)
+      product.name.toLowerCase().includes(normalized) ||
+      product.category.toLowerCase().includes(normalized)
     );
   });
-  renderCatalog(filtered);
+}
+
+searchInput?.addEventListener('input', (event) => {
+  renderCatalog(filterCatalog(event.target.value));
 });
 
-renderCatalog(products);
+async function loadCatalogFromSupabase() {
+  if (!hasCatalog) return;
+
+  const client =
+    window.supabase &&
+    window.SUPABASE_URL &&
+    window.SUPABASE_ANON_KEY &&
+    !window.SUPABASE_URL.includes('YOUR_PROJECT_REF') &&
+    !window.SUPABASE_ANON_KEY.includes('YOUR_SUPABASE_ANON_KEY')
+      ? window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY)
+      : null;
+
+  if (!client) {
+    renderCatalog(catalogProducts);
+    return;
+  }
+
+  const { data, error } = await client
+    .from('products')
+    .select('name, category, price, brand, code')
+    .order('brand', { ascending: true })
+    .order('name', { ascending: true });
+
+  if (error || !Array.isArray(data) || data.length === 0) {
+    renderCatalog(catalogProducts);
+    return;
+  }
+
+  catalogProducts = data.map((item) => {
+    const normalizedName =
+      item.name ||
+      [item.brand, item.code]
+        .filter(Boolean)
+        .join(' ')
+        .trim() ||
+      'Без названия';
+
+    return {
+      name: normalizedName,
+      category: item.category || 'Без категории',
+      price: item.price || 'По запросу'
+    };
+  });
+
+  renderCatalog(filterCatalog(searchInput?.value || ''));
+}
+
+loadCatalogFromSupabase();
 
 const openModalBtn = document.getElementById('btn-open-calc');
 const closeModalBtn = document.getElementById('btn-close-calc');
@@ -294,14 +349,65 @@ qtyInput?.addEventListener('change', validateQuantity);
 diagCheckbox?.addEventListener('change', calculateTotal);
 urgentCheckbox?.addEventListener('change', calculateTotal);
 
-submitBtn?.addEventListener('click', (event) => {
+function getSupabaseClient() {
+  if (
+    !window.supabase ||
+    !window.SUPABASE_URL ||
+    !window.SUPABASE_ANON_KEY ||
+    window.SUPABASE_URL.includes('YOUR_PROJECT_REF') ||
+    window.SUPABASE_ANON_KEY.includes('YOUR_SUPABASE_ANON_KEY')
+  ) {
+    return null;
+  }
+
+  return window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+}
+
+const supabaseClient = getSupabaseClient();
+
+function showFormMessage(text, isError = false) {
+  if (!messageBox) return;
+  messageBox.textContent = text;
+  messageBox.style.display = 'block';
+  messageBox.style.background = isError ? '#fef2f2' : '#ecfdf3';
+  messageBox.style.color = isError ? '#991b1b' : '#166534';
+}
+
+submitBtn?.addEventListener('click', async (event) => {
   event.preventDefault();
-  if (messageBox) messageBox.style.display = 'block';
+
+  if (!supabaseClient) {
+    showFormMessage('⚠️ Подключите Supabase: заполните SUPABASE_URL и SUPABASE_ANON_KEY в supabase-config.js.', true);
+    return;
+  }
+
+  if (!brandSelect || !qtyInput || !diagCheckbox || !urgentCheckbox || !totalDisplay) return;
+
+  submitBtn.disabled = true;
+
+  const requestPayload = {
+    brand: brandSelect.options[brandSelect.selectedIndex]?.text || 'Не указан',
+    quantity: parseInt(qtyInput.value, 10) || 1,
+    diagnostics: Boolean(diagCheckbox.checked),
+    urgent: Boolean(urgentCheckbox.checked),
+    total: parseInt((totalDisplay.textContent || '0').replace(/\s+/g, ''), 10) || 0
+  };
+
+  const { error } = await supabaseClient.from('repair_requests').insert(requestPayload);
+
+  if (error) {
+    showFormMessage(`❌ Ошибка отправки: ${error.message}`, true);
+    submitBtn.disabled = false;
+    return;
+  }
+
+  showFormMessage('✅ Ваша заявка успешно отправлена!');
 
   setTimeout(() => {
     if (messageBox) messageBox.style.display = 'none';
     closeModal();
-  }, 3000);
+    submitBtn.disabled = false;
+  }, 2500);
 });
 
 calculateTotal();
